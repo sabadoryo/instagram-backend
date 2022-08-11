@@ -11,5 +11,6 @@ export class AuthController {
     const user = await this.authService.createUser(userData);
 
     console.log(user);
+    return user;
   }
 }
