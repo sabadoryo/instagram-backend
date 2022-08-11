@@ -4,12 +4,12 @@ import { RegisterDto } from './dto/register.dto';
 
 @Controller()
 export class AuthController {
-    constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-    @Post('register')
-    async register(@Body() userData: RegisterDto) {
-        const user = await this.authService.createUser(userData);
+  @Post('register')
+  async register(@Body() userData: RegisterDto) {
+    const user = await this.authService.createUser(userData);
 
-        console.log(user);
-    }
+    console.log(user);
+  }
 }
