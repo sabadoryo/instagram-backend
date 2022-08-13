@@ -16,4 +16,20 @@ export class AuthService {
 
     return user;
   }
+  async findUserByUsername(username) {
+    const userExists = await this.prisma.users.findUnique({
+      where: {
+        username: username,
+      },
+    });
+    return userExists;
+  }
+  async findUserByEmail(email) {
+    const userExists = await this.prisma.users.findUnique({
+      where: {
+        email: email,
+      },
+    });
+    return userExists;
+  }
 }
