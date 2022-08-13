@@ -16,10 +16,14 @@ services:
     depends_on:
       - redis
       - postgres
+    networks:
+      - api
   redis: # Name of container
     image: redis
     ports:
       - 6379:6379
+    networks:
+      - api
     volumes: 
       - redis:/data
   postgres:
@@ -30,7 +34,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports: 
-      - '5432:5432'
+      - '5555:5432'
+    networks:
+      - api
     volumes:
       - docker-nest-postgres:/var/lib/postgresql/data
 
@@ -38,3 +44,5 @@ volumes:
   docker-nest-postgres:
   redis:
     driver: local
+networks:
+  api:
