@@ -8,6 +8,20 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() userData: RegisterDto) {
+    const isUsernameExists = await this.authService.findUserByUsername(
+      userData['username'],
+    );
+
+    const isEmailExists = await this.authService.findUserByEmail(
+      userData['email'],
+    );
+
+    console.log(isUsernameExists);
+    console.log(isEmailExists);
+
+    if (isUsernameExists || isEmailExists) {
+      return 'The entered data is incorrect. Please choose a different password or username.';
+    }
     const user = await this.authService.createUser(userData);
 
     console.log(user);
